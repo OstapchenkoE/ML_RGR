@@ -54,7 +54,7 @@ if uploaded_file is not None:
     st.success(f"Точность Tensorflow: {accuracy_tf}")
 
 
-st.title("Получить предсказания пожара.")
+st.title("Получить прогноз о мошенничестве.")
 
 st.header("distance_from_home:")
 distance_from_home = st.number_input("Число:", value=0.17)
