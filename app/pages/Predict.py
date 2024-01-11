@@ -12,7 +12,7 @@ uploaded_file = st.file_uploader("Выберите файл датасета")
 
 with open('models/GaussianNB.pkl', 'rb') as file:
     gnb = pickle.load(file)
-with open('models\BaggClass.pkl', 'rb') as file:
+with open('models/BaggClass.pkl', 'rb') as file:
     bagging_model = pickle.load(file)
 with open('models/GBM_classifier.pkl', 'rb') as file:
     gradient_model = pickle.load(file)
