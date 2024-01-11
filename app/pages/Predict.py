@@ -10,17 +10,17 @@ from tensorflow.keras.models import load_model
 uploaded_file = st.file_uploader("Выберите файл датасета")
 
 
-with open('models\GaussianNB.pkl', 'rb') as file:
+with open('models/GaussianNB.pkl', 'rb') as file:
     gnb = pickle.load(file)
-with open('models\BaggClass.pkl', 'rb') as file:
+with open('models/BaggClass.pkl', 'rb') as file:
     bagging_model = pickle.load(file)
-with open('models\GBM_classifier.pkl', 'rb') as file:
+with open('models/GBM_classifier.pkl', 'rb') as file:
     gradient_model = pickle.load(file)
-with open('models\StClasf.pkl', 'rb') as file:
+with open('models/StClasf.pkl', 'rb') as file:
     stacking_model= pickle.load(file)
-with open('models\Kmeans.pkl', 'rb') as file:
+with open('models/Kmeans.pkl', 'rb') as file:
     kmeans = pickle.load(file)
-tf_model = load_model('models\TF.h5')
+tf_model = load_model('models/TF.h5')
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
