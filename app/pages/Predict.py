@@ -54,30 +54,35 @@ if uploaded_file is not None:
     st.success(f"Точность Tensorflow: {accuracy_tf}")
 
 
-st.title("Получить предсказания пожара.")
+st.title("Получить прогноз о мошенничестве.")
 
 st.header("distance_from_home:")
+st.write("Расстояние между местом транзакции по банковской карте и домом (метры).")
 distance_from_home = st.number_input("Число:", value=0.17)
 
 st.header("distance_from_last_transaction:")
+st.write("Расстояние между местом транзакции по банковской карте и последней транзакции (метры).")
 distance_from_last_transaction = st.number_input("Число:", value=0.56)
 
 st.header("ratio_to_median_purchase_price:")
+st.write("Отношение самой последней транзакции к средней цене предыдущих транзакций.")
 ratio_to_median_purchase_price = st.number_input("Число:", value=3.4)
 
 st.header("repeat_retailer:")
+st.write("Произошла ли транзакция у одного и того же продавца.")
 repeat_retailer = int(st.toggle("Число:", value=1, key = "repeat_retailer"))
 
 st.header("used_chip")
+st.write("Был ли использован аналог csv, для США - CHIP.")
 used_chip = int(st.toggle("Число:", value=0, key = "used_chip"))
 
 st.header("used_pin_number")
+st.write("Был ли использован пин код.")
 used_pin_number = int(st.toggle("Число:", value=0, key = "used_pin_number"))
 
 st.header("online_order:")
+st.write("Была ли покупка совершена онлайн.")
 online_order = int(st.toggle("online_order", value=1, key = "online_order"))
-#st.toggle("online_order") # st.number_input("Число:", value=1, key = "online_order")
-#st.write(online_order)
 
 data = pd.DataFrame({'distance_from_home': [distance_from_home],
                     'distance_from_last_transaction': [distance_from_last_transaction],
