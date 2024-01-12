@@ -6,4 +6,4 @@ st.title("Разработка дашборда для моделей ML и ан
 st.header("Автор:")
 st.write("ФИО: Остапченко Евгений Антонович")
 st.write("Группа: ФИТ-221")
-st.image("data\Foto.jpg",width =200)
+st.image("data/Foto.jpg",width =200)
