@@ -97,8 +97,8 @@ data = pd.DataFrame({'distance_from_home': [distance_from_home],
 button_clicked = st.button("Предсказать")
 
 rez = {
-    0 : " - мошшеничества не будет",
-    1 : " - мошшеничество будет"
+    0 : " - мошеничества не будет",
+    1 : " - мошеничество будет"
 }
 
 if button_clicked:
