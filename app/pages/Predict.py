@@ -56,31 +56,31 @@ if uploaded_file is not None:
 
 st.title("Получить прогноз о мошенничестве.")
 
-st.header("distance_from_home:")
+st.header("Расстояние до дома (distance_from_home):")
 st.write("Расстояние между местом транзакции по банковской карте и домом (метры).")
-distance_from_home = st.number_input("Число:", value=0.17)
+distance_from_home = st.number_input("Значение (метры):", value=0.17 )
 
-st.header("distance_from_last_transaction:")
+st.header("Расстояние до последней танзакции (distance_from_last_transaction):")
 st.write("Расстояние между местом транзакции по банковской карте и последней транзакции (метры).")
-distance_from_last_transaction = st.number_input("Число:", value=0.56)
+distance_from_last_transaction = st.number_input("Значение (метры):", value=0.56)
 
-st.header("ratio_to_median_purchase_price:")
+st.header("Отношение к средней цене покупок (ratio_to_median_purchase_price):")
 st.write("Отношение самой последней транзакции к средней цене предыдущих транзакций.")
-ratio_to_median_purchase_price = st.number_input("Число:", value=3.4)
+ratio_to_median_purchase_price = st.number_input("Значение:", value=3.4)
 
-st.header("repeat_retailer:")
+st.header("Повторная покупка (repeat_retailer):")
 st.write("Произошла ли транзакция у одного и того же продавца.")
-repeat_retailer = int(st.toggle("Число:", value=1, key = "repeat_retailer"))
+repeat_retailer = int(st.toggle("repeat_retailer:", value=1, key = "repeat_retailer"))
 
-st.header("used_chip")
+st.header("Использован CHIP (used_chip):")
 st.write("Был ли использован аналог csv, для США - CHIP.")
-used_chip = int(st.toggle("Число:", value=0, key = "used_chip"))
+used_chip = int(st.toggle("used_chip:", value=0, key = "used_chip"))
 
-st.header("used_pin_number")
+st.header("Использован PIN (used_pin_number):")
 st.write("Был ли использован пин код.")
-used_pin_number = int(st.toggle("Число:", value=0, key = "used_pin_number"))
+used_pin_number = int(st.toggle("used_pin_number:", value=0, key = "used_pin_number"))
 
-st.header("online_order:")
+st.header("Онлайн покупка (online_order):")
 st.write("Была ли покупка совершена онлайн.")
 online_order = int(st.toggle("online_order", value=1, key = "online_order"))
 
@@ -96,33 +96,38 @@ data = pd.DataFrame({'distance_from_home': [distance_from_home],
 
 button_clicked = st.button("Предсказать")
 
+rez = {
+    0 : " - мошшеничества не будет",
+    1 : " - мошшеничество будет"
+}
+
 if button_clicked:
 
     st.header("GaussianNB:")
     pred =[]
     knn_pred = int(gnb.predict(data)[0])
     pred.append(knn_pred)
-    st.write(f"{knn_pred}")
+    st.write(f"{knn_pred} {rez[knn_pred]}")
 
     st.header("Bagging:")
     bagging_pred = int(bagging_model.predict(data)[0])
     pred.append(bagging_pred)
-    st.write(f"{bagging_pred}")
+    st.write(f"{bagging_pred} {rez[bagging_pred]}")
 
     st.header("Gradient:")
     gradient_pred = int(gradient_model.predict(data))
     pred.append(gradient_pred)
-    st.write(f"{gradient_pred}")
+    st.write(f"{gradient_pred} {rez[gradient_pred]}")
 
     st.header("Stacking:")
     stacking_pred = int(stacking_model.predict(data)[0])
     pred.append(stacking_pred)
-    st.write(f"{stacking_pred}")
+    st.write(f"{stacking_pred} {rez[stacking_pred]}")
 
     st.header("Perceptron:")
     tf_pred = int(np.round(tf_model.predict(data)[0][0]))
     pred.append(tf_pred)
-    st.write(f"{tf_pred}")
+    st.write(f"{tf_pred} {rez[tf_pred]}")
 
     st.header("Финальный результат:")
-    st.write(f"{mode(pred)}")
+    st.write(f"{mode(pred)} {rez[mode(pred)]}")
